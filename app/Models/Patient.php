@@ -8,31 +8,72 @@ use Illuminate\Database\Eloquent\Model;
 class Patient extends Model
 {
     use HasFactory;
-
-    protected $table = 'patients';
-    protected $primaryKey = 'patient_pin';
+    protected $table = 'patient'; 
+    protected $primaryKey = 'patient_number'; 
 
     protected $fillable = [
-        'first_name',
         'last_name',
+        'first_name',
         'middle_name',
-        'suffix',
-        'patient_pin',
-        'visit_number',
-        'birthday',
-        'age',
         'sex',
-        'height',
-        'weight',
+        'civil staus',
+        'birthday',
+        'age_1',
         'allergies',
-        'location',
-        'is_archived'
+        'position',
+        'unit_assignment',
+        'home_address',
+        'bachelor_degree',
+        'blood_type',
+        'religion',
+        'contact_number',
+        'referral_control_num',
+        'general_appearance',
+        'skin',
+        'heent',
+        'neck',
+        'chest',
+        'heart',
+        'breast',
+        'abdomen',
+        'musculoskeletal',
+        'neurologic',
+        'past_medical_history',
+        'previous_hospitalization',
+        'blood_transfusion',
+        'current_medication',
+        'obstetric_score',
+        'lmp',
+        'menarche',
+        'family_history',
+        'psychosocial_history',
+        'is_archived',
+        'is_finalized',
     ];
 
-    public function codeBlueActivation()
+    public function soap()
     {
-    return $this->hasMany(codeBlueActivation::class, 'patient_pin', 'patient_pin');
+        return $this->hasOne(Soap::class, 'patient_number', 'patient_number');
     }
 
+    public function labRequest()
+    {
+        return $this->hasOne(LabRequest::class, 'patient_number', 'patient_number');
+    }
+    
+    public function dietHistory()
+    {
+        return $this->hasOne(DietHistory::class, 'patient_number', 'patient_number');
+    }
+    
+    public function pcwm1()
+    {
+        return $this->hasOne(Pcwm1::class, 'patient_number', 'patient_number');
+    }
+    
+    public function pcwm2()
+    {
+        return $this->hasOne(Pcwm2::class, 'patient_number', 'patient_number');
+    }
 
 }
