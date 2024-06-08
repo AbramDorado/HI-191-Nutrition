@@ -27,19 +27,19 @@
 
     @section('button')
         @php
-            $lastCodeNumber = DB::table('code_blue_activations')->orderBy('code_number', 'desc')->first();
+            $lastPatientNumber = DB::table('patient')->orderBy('patient_number', 'desc')->first();
 
-            if ($lastCodeNumber) {
-                $nextCodeNumber = $lastCodeNumber->code_number + 1;
+            if ($lastPatientNumber) {
+                $nextPatientNumber = $lastPatientNumber->patient_number + 1;
             } else {
-                $nextCodeNumber = 1;
+                $nextPatientNumber = 1;
             }
         @endphp
 
-        <form method="GET" action="{{ route('maininformation', ['code_number' => $nextCodeNumber]) }}">
+        <!-- <form method="GET" action="{{ route('maininformation', ['patient_number' => $nextPatientNumber]) }}">
             @csrf
             <button type="submit" class="btn btn-primary btn-block">New Resuscitation Event</button>
-        </form>
+        </form> -->
     @endsection
 
 
@@ -74,39 +74,35 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>#</th>
-                                    <th>Date</th>
-                                    <th>Location</th>
                                     <th>Patient Name</th>
-                                    <th>Event Time Started</th>
-                                    <th>Event Time Ended</th>
-                                    <th>Code Leader</th>
+                                    <th>age</th>
+                                    <th>Address</th>
+                                    <th>Contact Number</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($resuscitationEvents as $event)
                                 <tr>
-                                    <td>{{ $event->code_number }}</td>
-                                    <td>{{ $event->created_at }}</td>
-                                    <td>{{ $event->location }}</td>
+                                    <td>{{ $event->patient_number }}</td>
                                     <td>{{ $event->first_name }} {{ $event->last_name }}</td>
-                                    <td>{{ $event->code_start_dt }}</td>
-                                    <td>{{ $event->code_end_dt }}</td>
-                                    <td>{{ $event->code_team_leader }}</td>
+                                    <td>{{ $event->age }}</td>
+                                    <td>{{ $event->home_address }}</td>
+                                    <td>{{ $event->contact_number }}</td>
                                     <td>
                                     <!-- <div class="btn-group" role="group" style="height: 100%;"> -->
-                                        <a href="{{ route('view_codeblueforms', ['patient_pin' => $event->patient_pin, 'code_number' => $event->code_number]) }}" class="btn btn-primary btn-sm" style="height: 100%; border-radius: 0;">
+                                        <!-- <a href="{{ route('view_codeblueforms', ['patient_pin' => $event->patient_pin, 'patient_number' => $event->patient_number]) }}" class="btn btn-primary btn-sm" style="height: 100%; border-radius: 0;">
                                             <i class="fas fa-eye"></i>
-                                        </a>
+                                        </a> -->
 
                                         <!-- Hide the edit button if the event is finalized -->
                                         @if (!$event->is_finalized)
-                                            <a href="{{ route('maininformation', ['code_number' => $event->code_number]) }}" class="btn btn-primary btn-sm" style="height: 100%; border-radius: 0;">
+                                            <a href="{{ route('maininformation', ['patient_number' => $event->patient_number]) }}" class="btn btn-primary btn-sm" style="height: 100%; border-radius: 0;">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
                                         @endif
 
-                                        <form action="{{ route('archive_codeblueforms', ['code_number' => $event->code_number]) }}" method="POST" style="display: inline;">
+                                        <form action="{{ route('archive_codeblueforms', ['patient_number' => $event->patient_number]) }}" method="POST" style="display: inline;">
                                             @csrf
                                             @method('POST')
                                             <button type="submit" class="btn btn-primary btn-sm" style="height: 100%; border-radius: 0;">
@@ -114,14 +110,14 @@
                                             </button>
                                         </form>
 
-                                        <a href="{{ route('download-pdf', ['codeEvent' => $event->code_number]) }}" class="btn btn-primary btn-sm" style="height: 100%; border-radius: 0;">
+                                        <a href="{{ route('download-pdf', ['codeEvent' => $event->patient_number]) }}" class="btn btn-primary btn-sm" style="height: 100%; border-radius: 0;">
                                             <i class="fas fa-file-pdf"></i>
                                         </a>
 
                                         <!-- Finalize button -->
 
                                         @if (!$event->is_finalized)
-                                            <form method="POST" action="{{ route('finalize_codeblueforms', ['code_number' => $event->code_number]) }}">
+                                            <form method="POST" action="{{ route('finalize_codeblueforms', ['patient_number' => $event->patient_number]) }}">
                                                 @csrf
                                                 <div class="form-group" style="margin-top: 8px;">
                                                     <label for="code_team_leader_password" class="text-danger">Unfinalized</label>
@@ -135,7 +131,7 @@
                                         @endif
                                         
                                         <!-- Display an alert for incorrect password -->
-                                        @if($event->code_number == session('error_code_number'))
+                                        @if($event->patient_number == session('error_patient_number'))
                                             <div class="alert alert-danger mt-2">
                                                 {{ session('error') }}
                                             </div>

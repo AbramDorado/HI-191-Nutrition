@@ -1,13 +1,12 @@
 <?php
 
-use App\Http\Controllers\EvaluationController;
-use App\Http\Controllers\FlowsheetController;
-use App\Http\Controllers\InitialResuscitationController;
-use App\Http\Controllers\OutcomeController;
+use App\Http\Controllers\DietHistoryController;
+use App\Http\Controllers\LabRequestController;
+use App\Http\Controllers\SoapController;
+use App\Http\Controllers\Pcwm1Controller;
+use App\Http\Controllers\Pcwm2Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FingerDevicesControlller;
-use App\Http\Controllers\CodeTeamController;
-use App\Http\Controllers\MainInformationController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PdfController;
@@ -27,58 +26,51 @@ Route::group(['middleware' => ['auth', 'Role'], 'roles' => ['admin']], function 
     Route::get('/admin', '\App\Http\Controllers\AdminController@index')->name('admin');
 });
 
-Route::get('/codeblueforms', function(){
-    return view('includes/codeblueforms');
-});
+// Route::get('/codeblueforms', function(){
+//     return view('includes/codeblueforms');
+// });
 
-Route::get('/maininformation', function () {
-    return view('maininformation');
-});
+// Route::get('/maininformation', function () {
+//     return view('maininformation');
+// });
 
-Route::get('/initialresuscitation', function(){
-    return view('initialresuscitation');
-});
+// Route::get('/initialresuscitation', function(){
+//     return view('initialresuscitation');
+// });
 
-Route::get('/flowsheet', function(){
-    return view('flowsheet');
-});
+// Route::get('/flowsheet', function(){
+//     return view('flowsheet');
+// });
 
-Route::get('/outcome', function(){
-    return view('outcome');
-});
+// Route::get('/outcome', function(){
+//     return view('outcome');
+// });
 
-Route::get('/evaluation', function(){
-    return view('evaluation');
-});
+// Route::get('/evaluation', function(){
+//     return view('evaluation');
+// });
 
-Route::get('/codeteam', function(){
-    return view('codeteam');
-});
+// Route::get('/codeteam', function(){
+//     return view('codeteam');
+// });
 
 Route::get('/users', function(){
     return view('users');
 });
 
-// Route::get('/codeteam', [CodeTeamController::class, 'showCodeTeamForm']);
-// Route::get('/evaluation', [EvaluationController::class, 'index'])->name('evaluation');
+
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::post('/store_user', [UserController::class, 'store'])->name('store_user');
 
 Route::put('/update_user/{id}', [UserController::class, 'updateUser'])->name('update_user');
 
-Route::get('/codeteam/{code_number}', [CodeTeamController::class, 'index'])
-    ->name('codeteam')
-    ->middleware('web');
-
+Route::get('/codeteam/{code_number}', [CodeTeamController::class, 'index'])->name('codeteam')->middleware('web');
 Route::post('/codeteam/{code_number}', [CodeTeamController::class, 'store'])->name('store_codeteam');
 
 Route::get('/initialresuscitation/{code_number}', [InitialResuscitationController::class, 'index'])->name('initialresuscitation');
 Route::post('/initialresuscitation/{code_number}', [InitialResuscitationController::class, 'store'])->name('store_initialresuscitation');
 
 Route::get('/flowsheet/{code_number}', [FlowsheetController::class, 'index'])->name('flowsheet');
-// Route::get('/flowsheet/{code_number}/data', [FlowsheetController::class, 'getFlowsheetsData'])->name('flowsheets.index');
-
-// Route::match(['get', 'post'], '/store/{code_number}', [FlowsheetController::class, 'store'])->name('store_flowsheet');
 
 Route::get('/evaluation/{code_number}', [EvaluationController::class, 'index'])->name('evaluation');
 Route::post('/evaluation/{code_number}', [EvaluationController::class, 'store'])->name('store_evaluation');
@@ -104,9 +96,9 @@ Route::get('/codeblueforms', '\App\Http\Controllers\FormController@index')->name
 Route::delete('/delete-user/{id}', '\App\Http\Controllers\UserController@deleteUser')->name('delete_user');
 
 
-Route::get('/codeblueforms/{patient_pin}/{code_number}/view', [FormController::class, 'viewCodeBlue'])->name('view_codeblueforms');
+Route::get('/codeblueforms/{patient_number}/view', [FormController::class, 'viewCodeBlue'])->name('view_codeblueforms');
 // Route::get('/codeblueforms/{code_number}/edit', [FormController::class, 'edit'])->name('edit_codeblueforms');
-Route::post('/codeblueforms/{code_number}/archive', [FormController::class, 'archive'])->name('archive_codeblueforms');
+Route::post('/codeblueforms/{patient_number}/archive', [FormController::class, 'archive'])->name('archive_codeblueforms');
 
 
 //for achrive

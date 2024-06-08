@@ -24,6 +24,7 @@ class Patient extends Model
         'unit_assignment',
         'home_address',
         'bachelor_degree',
+        'date_entered_service',
         'blood_type',
         'religion',
         'contact_number',

@@ -14,7 +14,7 @@ class CreatePatientTable extends Migration
     public function up()
     {
         Schema::create('patient', function (Blueprint $table) {
-            $table->bigIncrements('patient_number')->unique()->primary();
+            $table->bigIncrements('patient_number');
             $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
@@ -27,6 +27,7 @@ class CreatePatientTable extends Migration
             $table->string('unit_assignment')->nullable();
             $table->string('home_address')->nullable();
             $table->string('bachelor_degree')->nullable();
+            $table->date('date_entered_service')->default(date("Y-m-d"))->nullable();
             $table->string('blood_type')->nullable();
             $table->string('religion')->nullable();
             $table->unsignedInteger('contact_number')->nullable();

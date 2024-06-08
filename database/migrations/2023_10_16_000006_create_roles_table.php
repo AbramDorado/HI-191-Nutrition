@@ -15,16 +15,16 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
-            $table->unsignedBigInteger('code_number');
+            $table->unsignedBigInteger('patient_number');
             $table->string('role')->nullable();
             $table->string('password')->nullable();
 
             // Composite primary key
-            $table->primary(['id', 'code_number']);
+            $table->primary(['id', 'patient_number']);
 
             // Foreign key references
             $table->foreign('id')->references('id')->on('users');
-            $table->foreign('code_number')->references('code_number')->on('code_blue_activations');
+            $table->foreign('patient_number')->references('patient_number')->on('patient');
 
             $table->timestamps();
         });
