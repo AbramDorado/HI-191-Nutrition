@@ -19,7 +19,7 @@ class SoapController extends Controller
             ->orderBy('created_at', 'desc')
             ->first();
 
-        $soap->soap_dt = Carbon::parse($soap->soap_dt)->format('Y-m-d');
+        if ($soap) $soap->soap_dt = Carbon::parse($soap->soap_dt)->format('Y-m-d') ?? null;
         return view('soap', compact('patient_number', 'soap'));
     }
 

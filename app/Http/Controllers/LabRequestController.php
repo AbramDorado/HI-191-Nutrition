@@ -18,9 +18,14 @@ class LabRequestController extends Controller
         $labrequest = LabRequest::where('patient_number', $patient_number)
             ->orderBy('created_at', 'desc')
             ->first();
-        $request = json_decode($labrequest->request, true);
 
-        return view('labrequest', compact('patient_number', 'labrequest', 'request'));
+        if ($labrequest) {
+            $request = json_decode($labrequest->request, true);
+            return view('labrequest', compact('patient_number', 'labrequest', 'request'));
+        } else {
+            return view('labrequest', compact('patient_number', 'labrequest'));
+        }
+        
     }
 
     public function store(Request $request, $patient_number) 
