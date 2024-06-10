@@ -351,11 +351,15 @@ div.WordSection1
    </td>
   </tr>
  </thead>
+
+ @php $lN = 1; @endphp
+ @if(isset($soap))
+ @foreach($soap as $sp)
  <tr style='height:15.25pt'>
   <td width=638 colspan=5 valign=top style='width:478.75pt;border:solid black 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.25pt'>
   <p class=MsoNormal><b><span lang=EN-US style='font-family:"Arial",sans-serif'>Details
-  of Visit</span></b></p>
+  of Visit #{{$lN++ }}</span></b></p>
   </td>
  </tr>
  <tr style='height:15.25pt'>
@@ -363,14 +367,14 @@ div.WordSection1
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.25pt'>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Date
   of Visit:</span></p>
-  <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>{{$soap->soap_dt ?? '---'}}</span></p>
+  <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>{{$sp->soap_dt ?? '---'}}</span></p>
   </td>
   <td width=393 colspan=3 valign=top style='width:294.5pt;border-top:none;
   border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.25pt'>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Subjective
   / Chief Complaint:</span></p>
-  <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>{{$soap->subjective ?? '---'}}</span></p>
+  <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>{{$sp->subjective ?? '---'}}</span></p>
   </td>
  </tr>
  <tr style='height:15.25pt'>
@@ -384,43 +388,43 @@ div.WordSection1
   <td width=638 colspan=5 valign=top style='width:478.75pt;border:solid black 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.25pt'>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Blood
-  Pressure: {{$soap->bp ?? '---'}}</span></p>
+  Pressure: {{$sp->bp ?? '---'}}</span></p>
   </td>
  </tr>
  <tr style='height:15.25pt'>
   <td width=319 colspan=3 valign=top style='width:239.35pt;border:solid black 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.25pt'>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Pulse
-  Rate: {{$soap->pr ?? '---'}} bpm </span></p>
+  Rate: {{$sp->pr ?? '---'}} bpm </span></p>
   </td>
   <td width=319 colspan=2 valign=top style='width:239.4pt;border-top:none;
   border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.25pt'>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Respiratory
-  Rate: {{$soap->rr ?? '---'}}</span></p>
+  Rate: {{$sp->rr ?? '---'}}</span></p>
   </td>
  </tr>
  <tr style='height:15.25pt'>
   <td width=319 colspan=3 valign=top style='width:239.35pt;border:solid black 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.25pt'>
-  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Height: {{$soap->height ?? '---'}} cm</span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Height: {{$sp->height ?? '---'}} cm</span></p>
   </td>
   <td width=319 colspan=2 valign=top style='width:239.4pt;border-top:none;
   border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.25pt'>
-  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Weight: {{$soap->weight ?? '---'}} kg</span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Weight: {{$sp->weight ?? '---'}} kg</span></p>
   </td>
  </tr>
  <tr style='height:15.25pt'>
   <td width=319 colspan=3 valign=top style='width:239.35pt;border:solid black 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.25pt'>
-  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Temperature: {{$soap->temp ?? '---'}} degrees Celsius</span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Temperature: {{$sp->temp ?? '---'}} degrees Celsius</span></p>
   </td>
   <td width=319 colspan=2 valign=top style='width:239.4pt;border-top:none;
   border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.25pt'>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Body
-  Mass Index: {{$soap->bmi_1 ?? '---'}}</span></p>
+  Mass Index: {{$sp->bmi_1 ?? '---'}}</span></p>
   </td>
  </tr>
  <tr style='height:15.25pt'>
@@ -434,88 +438,88 @@ div.WordSection1
   <td width=160 valign=top style='width:119.65pt;border:solid black 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:8.2pt'>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Electrocardiogram:</span></p>
-  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>{{$soap->ecg ?? '---'}}</span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>{{$sp->ecg ?? '---'}}</span></p>
   </td>
   <td width=160 colspan=2 valign=top style='width:119.7pt;border-top:none;
   border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:8.2pt'>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Chest
-  X-Ray: {{$soap->cxr ?? '---'}}</span></p>
+  X-Ray: {{$sp->cxr ?? '---'}}</span></p>
   </td>
   <td width=160 valign=top style='width:119.7pt;border-top:none;border-left:
   none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:8.2pt'>
-  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>SGOT: {{$soap->sgot ?? '---'}}</span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>SGOT: {{$sp->sgot ?? '---'}}</span></p>
   </td>
   <td width=160 valign=top style='width:119.7pt;border-top:none;border-left:
   none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:8.2pt'>
-  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>SGPT: {{$soap->sgpt ?? '---'}}</span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>SGPT: {{$sp->sgpt ?? '---'}}</span></p>
   </td>
  </tr>
  <tr style='height:8.15pt'>
   <td width=160 valign=top style='width:119.65pt;border:solid black 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:8.15pt'>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Complete
-  Blood Count: {{$soap->cbc ?? '---'}}</span></p>
+  Blood Count: {{$sp->cbc ?? '---'}}</span></p>
   </td>
   <td width=160 colspan=2 valign=top style='width:119.7pt;border-top:none;
   border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:8.15pt'>
-  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Urinalysis: {{$soap->ua ?? '---'}}</span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Urinalysis: {{$sp->ua ?? '---'}}</span></p>
   </td>
   <td width=160 valign=top style='width:119.7pt;border-top:none;border-left:
   none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:8.15pt'>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Fasting
-  Blood Sugar: {{$soap->fbs ?? '---'}}</span></p>
+  Blood Sugar: {{$sp->fbs ?? '---'}}</span></p>
   </td>
   <td width=160 valign=top style='width:119.7pt;border-top:none;border-left:
   none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:8.15pt'>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Potassium
-  Blood Test (NaK): {{$soap->nak ?? '---'}}</span></p>
+  Blood Test (NaK): {{$sp->nak ?? '---'}}</span></p>
   </td>
  </tr>
  <tr style='height:8.15pt'>
   <td width=160 valign=top style='width:119.65pt;border:solid black 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:8.15pt'>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Creatinine;
-  {{$soap->crea ?? '---'}}</span></p>
+  {{$sp->crea ?? '---'}}</span></p>
   </td>
   <td width=160 colspan=2 valign=top style='width:119.7pt;border-top:none;
   border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:8.15pt'>
   <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Blood Urea
-  Nitrogen: {{$soap->bun ?? '---'}}</span></p>
+  Nitrogen: {{$sp->bun ?? '---'}}</span></p>
   </td>
   <td width=160 valign=top style='width:119.7pt;border-top:none;border-left:
   none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:8.15pt'>
-  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>HbA1c: {{$soap->hbaic ?? '---'}}</span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>HbA1c: {{$sp->hbaic ?? '---'}}</span></p>
   </td>
   <td width=160 valign=top style='width:119.7pt;border-top:none;border-left:
   none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:8.15pt'>
-  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>HepaBS: {{$soap->hepabs ?? '---'}}</span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>HepaBS: {{$sp->hepabs ?? '---'}}</span></p>
   </td>
  </tr>
  <tr style='height:8.15pt'>
   <td width=160 valign=top style='width:119.65pt;border:solid black 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:8.15pt'>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Blood
-  Uric Acid: {{$soap->bua ?? '---'}}</span></p>
+  Uric Acid: {{$sp->bua ?? '---'}}</span></p>
   </td>
   <td width=160 colspan=2 valign=top style='width:119.7pt;border-top:none;
   border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:8.15pt'>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Lipid
-  Profile: {{$soap->lipid_profile ?? '---'}}</span></p>
+  Profile: {{$sp->lipid_profile ?? '---'}}</span></p>
   </td>
   <td width=319 colspan=2 valign=top style='width:239.4pt;border-top:none;
   border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:8.15pt'>
-  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Others: {{$soap->others ?? '---'}}</span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Others: {{$sp->others ?? '---'}}</span></p>
   </td>
  </tr>
  <tr style='height:8.15pt'>
@@ -528,11 +532,21 @@ div.WordSection1
  <tr style='height:4.85pt'>
   <td width=638 colspan=5 valign=top style='width:478.75pt;border:solid black 1.0pt;
   border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:4.85pt'>
-  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Assessment: {{$soap->assessment ?? '---'}}</span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Assessment: {{$sp->assessment ?? '---'}}</span></p>
   <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
-  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Plan: {{$soap->plan ?? '---'}}</span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-family:"Arial",sans-serif'>Plan: {{$sp->plan ?? '---'}}</span></p>
   </td>
  </tr>
+ @endforeach
+ @else
+ <tr style='height:15.25pt'>
+  <td width=638 colspan=5 valign=top style='width:478.75pt;border:solid black 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.25pt'>
+  <p class=MsoNormal><b><span lang=EN-US style='font-family:"Arial",sans-serif'>No log</span></b></p>
+  </td>
+ </tr>
+ @endif
+
 </table>
 
 </div>
@@ -1001,6 +1015,20 @@ div.WordSection1
   </td>
  </tr>
  @endforeach
+ @else
+ <tr style='height:15.25pt'>
+  <td width=319 colspan=4 style='width:239.35pt;border:solid black 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.25pt'>
+  <p class=MsoNormal style='line-height:115%'><span lang=EN-US
+  style='font-size:11.0pt;line-height:115%;font-family:"Arial",sans-serif'>Weekly Weight Log</span></p>
+  </td>
+  <td width=319 colspan=2 style='width:239.4pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.25pt'>
+  <p class=MsoNormal style='line-height:115%'><span lang=EN-US
+  style='font-size:11.0pt;line-height:115%;font-family:"Arial",sans-serif'>No log</span></p>
+  </td>
+ </tr>
  @endif
 </table>
 </div>

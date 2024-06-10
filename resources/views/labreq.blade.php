@@ -132,10 +132,22 @@ div.WordSection1
   padding:0cm 5.4pt 0cm 5.4pt;height:15.25pt'>
   <p class=MsoNormal style='line-height:115%'><span lang=EN-US
   style='font-size:10.5pt;line-height:115%;font-family:"Arial",sans-serif'>
-        <div>{{$labRequest->request ?? '---'}}</div>
+        <@if($labRequest->request)
+        @php
+            $requestData = json_decode($labRequest->request, true);
+        @endphp
+        
+            @foreach($requestData as $item)
+                {{ $item }}
+                <br>
+            @endforeach
+        
+    @else
+        <p>No request details available.</p>
+    @endif
 </span></p>
   <p class=MsoNormal style='line-height:115%'><span lang=EN-US
-  style='font-size:10.5pt;line-height:115%;font-family:"Arial",sans-serif'>Other request/s: {{$labRequest->others ?? '---'}}</span></p>
+  style='font-size:10.5pt;line-height:115%;font-family:"Arial",sans-serif'><br>Other request/s: {{$labRequest->others ?? 'None'}}</span></p>
 </td>
  </tr>
  <tr style='height:15.25pt'>

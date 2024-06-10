@@ -19,7 +19,7 @@ class CreateLabRequestsTable extends Migration
             $table->string('patient_name_1')->nullable();
             $table->unsignedInteger('age_2')->nullable();
             $table->string('sex_2')->nullable();
-            $table->string('request')->nullable();
+            $table->json('request')->nullable();
             $table->string('others')->nullable();
             $table->string('medical_officer')->nullable();
             $table->unsignedInteger('license_num')->nullable();

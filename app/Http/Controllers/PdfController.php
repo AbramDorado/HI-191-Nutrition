@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\PatientInformation;
+use App\Models\Soap;
 
 class PdfController extends Controller
 {
@@ -14,7 +15,9 @@ class PdfController extends Controller
                                      ->where('patient_number', $patient_number)
                                      ->firstOrFail();
 
-        $soap = $patient->soap;
+        $soap = Soap::where('patient_number', $patient_number)
+        ->orderBy('created_at', 'desc')
+        ->get();
         $diethistory = $patient->dietHistory;
         $labRequest = $patient->labRequest;
         $pcwm = $patient->pcwm;
